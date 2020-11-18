@@ -1,0 +1,11 @@
+name: GriefDefenderFix
+version: 1.0
+author: UselessMnemonic
+description: Removes GriefDefender owner tags from player related inventories.
+website: https://github.com/UselessMnemonic
+
+main: me.uselessmnemonic.griefdefenderfix.Fix
+depend: [GriefDefender]
+load: POSTWORLD
+
+api-version: 1.16
