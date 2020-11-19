@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
@@ -50,13 +51,17 @@ public class Fix extends JavaPlugin implements Listener {
         Fix.sanitize(event.getPlayer().getInventory());
         Fix.sanitize(event.getPlayer().getEnderChest());
     }
+
     /**
      * Sanitize item when picked up.
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
+    @Deprecated
     public void onItemGrab(PlayerAttemptPickupItemEvent event) {
+        /*
         Item item = event.getItem();
         item.setItemStack(Fix.sanitize(item.getItemStack()));
+        */
     }
 
     /**
