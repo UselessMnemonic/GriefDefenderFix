@@ -35,24 +35,34 @@ public class Fix extends JavaPlugin implements Listener {
         }.runTaskTimer(this, 0, 40);
     }
 
+    /**
+     * Sanitize inventory when opened.
+     */
     @EventHandler
     public void onInventoryOpened(InventoryOpenEvent event) {
         Fix.sanitize(event.getInventory());
     }
-
+    /**
+     * Sanitize inventory when player logs in.
+     */
     @EventHandler
     public void onLoginEvent(PlayerLoginEvent event) {
         Fix.sanitize(event.getPlayer().getInventory());
         Fix.sanitize(event.getPlayer().getEnderChest());
-        event.getPlayer().updateInventory();
     }
-
+    /**
+     * Sanitize item when picked up.
+     */
     @EventHandler
     public void onItemGrab(PlayerAttemptPickupItemEvent event) {
         Item item = event.getItem();
         item.setItemStack(Fix.sanitize(item.getItemStack()));
     }
 
+    /**
+     * Sanitizes an inventory.
+     * @param inventory The inventory to sanitize.
+     */
     private static void sanitize(@Nonnull Inventory inventory) {
         for (int i = 0; i < inventory.getSize(); i++) {
             ItemStack stack = inventory.getItem(i);
@@ -62,6 +72,11 @@ public class Fix extends JavaPlugin implements Listener {
         }
     }
 
+    /**
+     * Sanitizes an ItemStack
+     * @param stack The stack to sanitize.
+     * @return The same ItemStack
+     */
     private static ItemStack sanitize(@Nonnull ItemStack stack) {
 
         if (stack.hasItemMeta()) {
